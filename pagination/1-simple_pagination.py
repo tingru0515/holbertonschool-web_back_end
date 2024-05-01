@@ -2,7 +2,7 @@
 """This module defines index_range function and Server class"""
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -42,4 +42,3 @@ class Server:
         pagination: Tuple[int, int] = index_range(page, page_size)
         return [each_page
                 for each_page in self.__dataset[pagination[0]:pagination[1]]]
-    
