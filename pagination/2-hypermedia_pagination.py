@@ -2,7 +2,7 @@
 """This module defines index_range function and Server class"""
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Any, Dict
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -42,3 +42,22 @@ class Server:
         pagination: Tuple[int, int] = index_range(page, page_size)
         return [each_page
                 for each_page in self.__dataset[pagination[0]:pagination[1]]]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[Any, Any]:
+        """returns a dictionary containing the following key-value pairs"""
+        new_dict: Dict[Any, Any] = {}
+        new_dict["page_size"] = page_size
+        new_dict["page"] = page
+        new_dict["data"] = self.get_page(page, page_size)
+        total_rows: int = len(self.__dataset)
+        total_pages: int = math.ceil(total_rows / page_size)
+        if page >= total_pages:
+            new_dict["next_page"] = None
+        else:
+            new_dict["next_page"] = page + 1
+        if page == 1:
+            new_dict["prev_page"] = None
+        else:
+            new_dict["prev_page"] = page - 1
+        new_dict["total_pages"] = total_pages
+        return new_dict
