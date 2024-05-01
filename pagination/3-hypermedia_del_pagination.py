@@ -50,7 +50,7 @@ class Server:
         index(int):
         page_size(int):
         """
-        assert index is None or index >= 0, "Index must be None or a non-negative integer."
+        assert index is None or index >= 0, "None or a non-negative integer."
         assert page_size > 0, "Page size must be a positive integer."
 
         indexed_dataset = self.indexed_dataset()
