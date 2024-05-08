@@ -5,8 +5,7 @@ export default class Car {
     this._color = color;
   }
 
-  coloneCar() {
-    const { _brand, _motor, _color } = this;
-    return new this.constructor(_brand, _motor, _color);
+  cloneCar() {
+    return new this.constructor();
   }
 }
