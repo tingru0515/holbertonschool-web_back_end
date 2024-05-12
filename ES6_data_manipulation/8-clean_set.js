@@ -1,9 +1,18 @@
-function cleanSet(set, startString) {
-  // Filter the set to include only values that start with startString
-  const filteredValues = [...set].filter((value) => value.startsWith(startString));
+export default function cleanSet(set, startString) {
+  if (startString === '') {
+    return '';
+  }
+  if (typeof startString !== 'string') {
+    return '';
+  }
 
-  // Join the filtered values with '-' separator
-  return filteredValues.join('-');
+  const newSet = [];
+
+  set.forEach((element) => {
+    if (element && element.startsWith(startString)) {
+      newSet.push(element.slice(startString.length));
+    }
+  });
+
+  return newSet.join('-');
 }
-
-export default cleanSet;
